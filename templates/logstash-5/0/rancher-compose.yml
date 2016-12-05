@@ -65,10 +65,11 @@ logstash-indexer:
     logstash:
       inputs: |
         rabbitmq {
-          host => "rabbitmq"
+          host => "rabbitmq-master"
           port => "5672"
           key => "logstash"
           queue => "logs"
+          exchange => "logging"
           subscription_retry_interval_seconds => "5"
         }
       filters: |
@@ -83,7 +84,9 @@ logstash-collector:
         ${collector_inputs}
       outputs: |
         rabbitmq {
-          host => "rabbitmq"
+          host => "rabbitmq-master"
           port => "5672"
           key => "logstash"
+          exchange => "logging"
+          exchange_type => "fanout"
         }
