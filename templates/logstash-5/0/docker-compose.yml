@@ -15,7 +15,7 @@ logstash-indexer:
   - /etc/logstash
   image: logstash:5.0.1
   links:
-  - rabbitmq
+  - rabbitmq-base:rabbitmq
   external_links:
   - ${elasticsearch_link}:elasticsearch
   stdin_open: true
