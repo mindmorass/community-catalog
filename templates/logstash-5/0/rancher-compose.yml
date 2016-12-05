@@ -51,13 +51,6 @@
       default: "es/elasticsearch-clients"
       required: true
       type: "service"
-    - variable: "rabbitmq_service"
-      description: |
-        Rabbitmq Service
-      label: "Rabbitmq Service"
-      default: "rabbitmq-3"
-      required: true
-      type: "service"
 
 logsta-indexer:
   metadata:
