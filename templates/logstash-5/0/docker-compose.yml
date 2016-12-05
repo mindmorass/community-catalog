@@ -14,10 +14,9 @@ logstash-indexer:
   - -f
   - /etc/logstash
   image: logstash:5.0.1
-  links:
-  - rabbitmq-base:rabbitmq
   external_links:
   - ${elasticsearch_link}:elasticsearch
+  - ${rabbitmq_link}:rabbitmq
   stdin_open: true
   labels:
     io.rancher.sidekicks: logstash-indexer-config
@@ -32,8 +31,9 @@ logstash-collector-config:
 logstash-collector:
   restart: always
   tty: true
-  links:
-  - rabbitmq
+  external_links:
+  - ${rabbitmq_link}:rabbitmq
+  stdin_open: true
   ports:
   - "5000/udp"
   - "6000/tcp"
@@ -49,39 +49,3 @@ logstash-collector:
   labels:
     io.rancher.sidekicks: logstash-collector-config
     io.rancher.container.hostname_override: container_name
-
-rabbitmq:
-  image: rdaneel/rabbitmq-conf:0.2.0
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: rabbitmq-base,rabbitmq-datavolume
-  volumes_from:
-    - rabbitmq-datavolume
-  environment:
-    - RABBITMQ_NET_TICKTIME=${net_ticktime}
-    - RABBITMQ_CLUSTER_PARTITION_HANDLING=${cluster_partition_handling}
-    - CONFD_ARGS=${confd_args}
-
-rabbitmq-datavolume:
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
-  volumes:
-    - /etc/rabbitmq
-    - /opt/rancher/bin
-  entrypoint: /bin/true
-  image: rabbitmq:3.6-management
-
-rabbitmq-base:
-  labels:
-    io.rancher.container.hostname_override: container_name
-  image: rabbitmq:3.6-management
-  restart: always
-  volumes_from:
-    - rabbitmq-datavolume
-  net: "container:rabbitmq"
-  entrypoint:
-    - /opt/rancher/bin/run.sh
-  environment:
-    - RABBITMQ_ERLANG_COOKIE=${erlang_cookie}
-

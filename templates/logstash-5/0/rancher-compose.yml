@@ -48,11 +48,19 @@
         stack/service link or external service link to elasticsearch
         cluster.
       label: "Elasticsearch stack/service"
-      default: "es/elasticsearch-clients"
+      default: "elasticserach-5/elasticsearch-clients"
+      required: true
+      type: "service"
+    - variable: "rabbitmq_link"
+      description: |
+        stack/service link or external service link to rabbitmq
+        cluster.
+      label: "Rabbitmq stack/service"
+      default: "rabbitmq"
       required: true
       type: "service"
 
-logsta-indexer:
+logstash-indexer:
   metadata:
     logstash:
       inputs: |
@@ -67,6 +75,7 @@ logsta-indexer:
         ${indexer_filters}
       outputs: |
         ${indexer_outputs}
+
 logstash-collector:
   metadata:
     logstash:
@@ -78,38 +87,3 @@ logstash-collector:
           port => "5672"
           key => "logstash"
         }
-
-rabbitmq:
-  image: rdaneel/rabbitmq-conf:0.2.0
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: rabbitmq-base,rabbitmq-datavolume
-  volumes_from:
-    - rabbitmq-datavolume
-  environment:
-    - RABBITMQ_NET_TICKTIME=${net_ticktime}
-    - RABBITMQ_CLUSTER_PARTITION_HANDLING=${cluster_partition_handling}
-    - CONFD_ARGS=${confd_args}
-
-rabbitmq-datavolume:
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
-  volumes:
-    - /etc/rabbitmq
-    - /opt/rancher/bin
-  entrypoint: /bin/true
-  image: rabbitmq:3.6-management
-
-rabbitmq-base:
-  labels:
-    io.rancher.container.hostname_override: container_name
-  image: rabbitmq:3.6-management
-  restart: always
-  volumes_from:
-    - rabbitmq-datavolume
-  net: "container:rabbitmq"
-  entrypoint:
-    - /opt/rancher/bin/run.sh
-  environment:
-    - RABBITMQ_ERLANG_COOKIE=${erlang_cookie}
