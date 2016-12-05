@@ -13,7 +13,7 @@
       label: "Public Port"
       description: "Unique public port for Kibana"
       type: "int"
-      default: 80
+      default: 8080
       required: true
 
 nginx-proxy:
