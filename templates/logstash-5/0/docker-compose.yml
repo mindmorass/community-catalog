@@ -13,7 +13,7 @@ logstash-indexer:
   - logstash
   - -f
   - /etc/logstash
-  image: logstash:5.0.1
+  image: logstash:5.0.2
   external_links:
   - ${elasticsearch_link}:elasticsearch
   stdin_open: true
@@ -41,7 +41,7 @@ logstash-collector:
   - logstash
   - -f
   - /etc/logstash
-  image: logstash:5.0.1
+  image: logstash:5.0.2
   stdin_open: true
   labels:
     io.rancher.sidekicks: logstash-collector-config

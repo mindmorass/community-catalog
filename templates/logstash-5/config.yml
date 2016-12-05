@@ -1,5 +1,5 @@
 name: Logstash-5
 description: |
   Centralize data processing of all types
-version: 5.0.1
+version: 5.0.2
 category: ELK
