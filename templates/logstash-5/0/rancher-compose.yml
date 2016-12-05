@@ -1,5 +1,5 @@
 .catalog:
-  name: "Logstash"
+  name: "Logstash-5"
   version: "5.0.1"
   description: "Logstash: Process Any Data, From Any Source"
   questions:
