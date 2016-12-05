@@ -51,11 +51,11 @@
       default: "es/elasticsearch-clients"
       required: true
       type: "service"
-    - variable: "rabbitmq_link"
+    - variable: "rabbitmq_lb"
       description: |
-        Rabbitmq cluster
-      label: "Rabbitmq Node/Cluster"
-      default: "rabbitmq"
+        Rabbitmq load balancer
+      label: "Rabbitmq LB"
+      default: "rabbitmq_lb"
       required: true
       type: "service"
 
