@@ -51,7 +51,7 @@
       default: "es/elasticsearch-clients"
       required: true
       type: "service"
-    - variable: "rabbitmq_lb"
+    - variable: "rabbitmq_service"
       description: |
         Rabbitmq Service
       label: "Rabbitmq Service"
