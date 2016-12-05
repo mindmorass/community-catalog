@@ -1,0 +1,5 @@
+name: Elasticsearch 5.x
+description: |
+  Elasticsearch, you know for search!
+version: 5.0.1
+category: ELK
