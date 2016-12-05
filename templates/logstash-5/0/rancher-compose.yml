@@ -48,7 +48,7 @@
         stack/service link or external service link to elasticsearch
         cluster.
       label: "Elasticsearch stack/service"
-      default: "elasticserach-5/elasticsearch-clients"
+      default: "elasticsearch-5/elasticsearch-clients"
       required: true
       type: "service"
     - variable: "rabbitmq_link"
@@ -83,7 +83,7 @@ logstash-collector:
         ${collector_inputs}
       outputs: |
         rabbitmq {
-          host => "rabbitmq-master"
+          host => "rabbitmq"
           port => "5672"
           key => "logstash"
         }
