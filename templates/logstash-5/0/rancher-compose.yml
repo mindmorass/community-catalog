@@ -51,7 +51,15 @@
       default: "es/elasticsearch-clients"
       required: true
       type: "service"
-logstash-indexer:
+    - variable: "rabbitmq_link"
+      description: |
+        Rabbitmq cluster
+      label: "Rabbitmq Node/Cluster"
+      default: "rabbitmq"
+      required: true
+      type: "service"
+
+logsta-indexer:
   metadata:
     logstash:
       inputs: |
