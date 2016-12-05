@@ -65,7 +65,7 @@ logstash-indexer:
     logstash:
       inputs: |
         rabbitmq {
-          host => "rabbitmq-master"
+          host => "rabbitmq"
           port => "5672"
           key => "logstash"
           queue => "logs"
@@ -84,7 +84,7 @@ logstash-collector:
         ${collector_inputs}
       outputs: |
         rabbitmq {
-          host => "rabbitmq-master"
+          host => "rabbitmq"
           port => "5672"
           key => "logstash"
           exchange => "logging"
