@@ -53,9 +53,9 @@
       type: "service"
     - variable: "rabbitmq_lb"
       description: |
-        Rabbitmq load balancer
-      label: "Rabbitmq LB"
-      default: "rabbitmq_lb"
+        Rabbitmq Service
+      label: "Rabbitmq Service"
+      default: "rabbitmq-3"
       required: true
       type: "service"
 
