@@ -14,8 +14,8 @@ logstash-indexer:
   - -f
   - /etc/logstash
   image: logstash:5.0.1
-  external_links:
-  - ${rabbitmq_service}/rabbitmq-3-rabbitmq-lb-1:rabbitmq
+  links:
+  - rabbitmq
   external_links:
   - ${elasticsearch_link}:elasticsearch
   stdin_open: true
@@ -32,8 +32,8 @@ logstash-collector-config:
 logstash-collector:
   restart: always
   tty: true
-  external_links:
-  - ${rabbitmq_service}/rabbitmq-3-rabbitmq-lb-1:rabbitmq
+  links:
+  - rabbitmq
   ports:
   - "5000/udp"
   - "6000/tcp"
