@@ -51,26 +51,12 @@
       default: "elasticsearch-5/elasticsearch-clients"
       required: true
       type: "service"
-    - variable: "rabbitmq_link"
-      description: |
-        stack/service link or external service link to rabbitmq
-        cluster.
-      label: "Rabbitmq stack/service"
-      default: "rabbitmq"
-      required: true
-      type: "service"
 
 logstash-indexer:
   metadata:
     logstash:
       inputs: |
-        rabbitmq {
-          host => "rabbitmq"
-          port => "5672"
-          key => "logstash"
-          queue => "logs"
-          subscription_retry_interval_seconds => "5"
-        }
+        {}
       filters: |
         ${indexer_filters}
       outputs: |
@@ -82,8 +68,4 @@ logstash-collector:
       inputs: |
         ${collector_inputs}
       outputs: |
-        rabbitmq {
-          host => "rabbitmq"
-          port => "5672"
-          key => "logstash"
-        }
+        {}

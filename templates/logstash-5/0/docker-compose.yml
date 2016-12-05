@@ -16,7 +16,6 @@ logstash-indexer:
   image: logstash:5.0.1
   external_links:
   - ${elasticsearch_link}:elasticsearch
-  - ${rabbitmq_link}:rabbitmq
   stdin_open: true
   labels:
     io.rancher.sidekicks: logstash-indexer-config
@@ -31,8 +30,6 @@ logstash-collector-config:
 logstash-collector:
   restart: always
   tty: true
-  external_links:
-  - ${rabbitmq_link}:rabbitmq
   stdin_open: true
   ports:
   - "5000/udp"
