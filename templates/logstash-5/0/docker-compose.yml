@@ -2,6 +2,7 @@ logstash-indexer-config:
   restart: always
   image: rancher/logstash-config:v0.2.0
   labels:
+    io.rancher.scheduler.affinity:host_label_ne: host=elasticsearch
     io.rancher.container.hostname_override: container_name
 
 logstash-indexer:
@@ -19,6 +20,7 @@ logstash-indexer:
   - ${rabbitmq_link}:rabbitmq
   stdin_open: true
   labels:
+    io.rancher.scheduler.affinity:host_label_ne: host=elasticsearch
     io.rancher.sidekicks: logstash-indexer-config
     io.rancher.container.hostname_override: container_name
 
@@ -26,6 +28,7 @@ logstash-collector-config:
   restart: always
   image: rancher/logstash-config:v0.2.0
   labels:
+    io.rancher.scheduler.affinity:host_label_ne: host=elasticsearch
     io.rancher.container.hostname_override: container_name
 
 logstash-collector:
@@ -47,5 +50,6 @@ logstash-collector:
   image: logstash:5.0.1
   stdin_open: true
   labels:
+    io.rancher.scheduler.affinity:host_label_ne: host=elasticsearch
     io.rancher.sidekicks: logstash-collector-config
     io.rancher.container.hostname_override: container_name

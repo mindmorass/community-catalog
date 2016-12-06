@@ -12,6 +12,7 @@ nginx-proxy-conf:
   image: rancher/nginx-conf:v0.2.0
   command: "-backend=rancher --prefix=/2015-07-25"
   labels:
+    io.rancher.scheduler.affinity:host_label_ne: host=elasticsearch
     io.rancher.container.hostname_override: container_name
 
 nginx-proxy:
@@ -19,6 +20,7 @@ nginx-proxy:
   volumes_from:
     - nginx-proxy-conf
   labels:
+    io.rancher.scheduler.affinity:host_label_ne: host=elasticsearch
     io.rancher.container.hostname_override: container_name
     io.rancher.sidekicks: nginx-proxy-conf,kibana5
   external_links:
@@ -33,4 +35,5 @@ kibana5:
   environment:
     ELASTICSEARCH_URL: "http://elasticsearch:9200"
   labels:
+    io.rancher.scheduler.affinity:host_label_ne: host=elasticsearch
     io.rancher.container.hostname_override: container_name
